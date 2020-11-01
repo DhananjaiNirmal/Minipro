@@ -1,17 +1,26 @@
 package com.shoes.ecom.service;
 
+import com.shoes.ecom.po.Schedule;
 import com.shoes.ecom.po.User;
+import com.shoes.ecom.repo.ScheduleRepo;
+import com.shoes.ecom.repo.ServiceRepo;
 import com.shoes.ecom.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
     
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    ServiceRepo serviceRepo;
+    @Autowired
+    ScheduleRepo scheduleRepo;
+
     
     public List<User> getAll(){
         return userRepo.findAll();
@@ -42,6 +51,26 @@ public class UserService {
         }
         else{
             userRepo.save(userToCreate);
+            Integer k=userToCreate.getServiceId();
+
+            Optional<com.shoes.ecom.po.Service> serviceOptional = serviceRepo.findById(k);
+            if(serviceOptional != null){
+                com.shoes.ecom.po.Service serviceObj = serviceOptional.get();
+                for(int i=0;i<serviceObj.getHours();i++)
+                {
+                    Schedule schedule=new Schedule();
+                    schedule.setAvailable(1);
+                    schedule.setSid(serviceObj.getId());
+                    schedule.setUid(userToCreate.getId());
+                    schedule.setHourL(i+serviceObj.getTimeL());
+                    schedule.setHourU(i+serviceObj.getTimeL()+1);
+                    scheduleRepo.save(schedule);
+
+                }
+
+            }
+
+
             return Boolean.TRUE;
         }
     }
