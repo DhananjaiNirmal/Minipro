@@ -1,39 +1,37 @@
-package com.shoes.ecom.po;
+package com.shoes.ecom.dto;
 
-import javax.persistence.*;
-import java.io.CharArrayReader;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Entity
-@Table(name ="booking")
-public class Booking {
+public class BookingResponse {
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
     private Integer id;
-    @Column(name = "S_ID")
+    private String name;
+
     private Integer sid;
-    @Column(name = "S_UID")
+
     private Integer suid;
-    @Column(name = "U_ID")
+
     private Integer uid;
 
-    @Column(name = "HOUR_L")
+
     private Integer hourl;
 
-    @Column(name = "HOUR_U")
+
     private Integer houru;
 
-    @Column(name = "STATUS")
     private Character status;
+     private String address;
+     private String phNo;
 
-    public Integer getUid() {
-        return uid;
+    public String getName() {
+        return name;
     }
 
-    public void setUid(Integer uid) {
-        this.uid = uid;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getId() {
@@ -60,6 +58,14 @@ public class Booking {
         this.suid = suid;
     }
 
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
+    }
+
     public Integer getHourl() {
         return hourl;
     }
@@ -84,8 +90,19 @@ public class Booking {
         this.status = status;
     }
 
-
-
-
-
+    public String getAddress() {
+        return address;
     }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPhNo() {
+        return phNo;
+    }
+
+    public void setPhNo(String phNo) {
+        this.phNo = phNo;
+    }
+}

@@ -22,17 +22,27 @@ public class User {
     @Column(name="ADDRESS")
     private String address;
     @Column(name="AADHAR")
-    private Integer aadhar;
+    private Long aadhar;
     @Column(name="LOGGED_IN", insertable = false)
     private Character loggedIn;
     @Column(name ="SERVICE_ID")
     private Integer serviceId;
+    @Column(name ="COST")
+    private Integer cost;
 
-    public Integer getAadhar() {
+    public Integer getCost() {
+        return cost;
+    }
+
+    public void setCost(Integer cost) {
+        this.cost = cost;
+    }
+
+    public Long getAadhar() {
         return aadhar;
     }
 
-    public void setAadhar(Integer aadhar) {
+    public void setAadhar(Long aadhar) {
         this.aadhar = aadhar;
     }
 
