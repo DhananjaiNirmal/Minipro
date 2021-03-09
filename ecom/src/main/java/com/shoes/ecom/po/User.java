@@ -30,6 +30,13 @@ public class User {
     @Column(name ="COST")
     private Integer cost;
 
+
+
+
+
+
+
+
     public Integer getCost() {
         return cost;
     }
